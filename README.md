@@ -223,6 +223,21 @@ Deep dive into specific architectural patterns for distributed systems:
 
 **Features:** 75+ code samples, pattern comparison tables, hands-on exercises, real-world case studies
 
+#### Phase 3: Scalability & Performance (~2 hours, 50 KB)
+**Location:** `/docs/phase3-scalability-performance/`
+
+Techniques for building systems that scale and perform:
+
+- **[Scalability & Performance](docs/phase3-scalability-performance/scalability-performance.md)** (~50 KB, 90-120 min)
+  - **Caching Strategies:** Cache-aside, write-through, write-behind, CDN, Redis patterns
+  - **Load Balancing:** L4 vs L7, algorithms (round robin, least connections), health checks
+  - **Database Scaling:** Read replicas, sharding strategies, connection pooling
+  - **Performance Optimization:** Query optimization, denormalization, async processing
+
+- **[Phase 3 Index](docs/phase3-scalability-performance/INDEX.md)** - Quick reference, decision criteria, checklists
+
+**Features:** Complete code examples, real-world patterns, trade-off analysis, hands-on exercises
+
 ### Architecture Deep Dives
 - [Microservices Architecture](ecommerce-microservices/ARCHITECTURE.md) - Design decisions
 - [Service Communication](ecommerce-microservices/docs/SERVICE_COMMUNICATION.md) - Sync vs async

@@ -12,19 +12,21 @@ This repository documents a comprehensive learning path from monolithic applicat
 
 ## 📚 Learning Materials (Important for Agents!)
 
-This project contains **extensive educational reference documents** in multiple locations. These files are **comprehensive learning materials** (240 KB total) that should **NOT be read automatically** to conserve tokens.
+This project contains **extensive educational reference documents** in multiple locations. These files are **comprehensive learning materials** (290 KB total) that should **NOT be read automatically** to conserve tokens.
 
 ### Documentation Locations:
 
 1. **`docs/fundamentals/`** - Phase 1 foundations (119 KB, 4 hours reading)
 2. **`docs/phase2-architecture-patterns/`** - Phase 2 patterns (121 KB, 4.5 hours reading)
-3. **`ecommerce-microservices/docs/`** - Practical implementation guides
+3. **`docs/phase3-scalability-performance/`** - Phase 3 scalability (50 KB, 2 hours reading)
+4. **`ecommerce-microservices/docs/`** - Practical implementation guides
 
 ### Instructions for Claude Agents:
 
 **DO NOT:**
 - Automatically scan or read files in `docs/fundamentals/`
 - Automatically scan or read files in `docs/phase2-architecture-patterns/`
+- Automatically scan or read files in `docs/phase3-scalability-performance/`
 - Automatically scan or read files in `ecommerce-microservices/docs/`
 - Load these files into context unless explicitly needed
 - Include them in exploratory file reads
@@ -39,6 +41,7 @@ This project contains **extensive educational reference documents** in multiple 
 1. First, check the relevant INDEX file:
    - `docs/fundamentals/INDEX.md` - For Phase 1 topics
    - `docs/phase2-architecture-patterns/INDEX.md` - For Phase 2 topics
+   - `docs/phase3-scalability-performance/INDEX.md` - For Phase 3 topics
    - `ecommerce-microservices/docs/INDEX.md` - For practical guides
 2. Read the brief description in the INDEX
 3. Only open the full document if it directly answers the user's question
@@ -70,6 +73,15 @@ This project contains **extensive educational reference documents** in multiple 
 - **Architectural Patterns** (~38 KB)
   - Layered, Hexagonal, Clean Architecture, Strangler Fig pattern
 
+#### Phase 3: Scalability & Performance (docs/phase3-scalability-performance/)
+**Total:** 50 KB (1 comprehensive document + INDEX)
+
+- **Scalability & Performance** (~50 KB)
+  - Caching strategies (cache-aside, write-through, CDN, Redis patterns)
+  - Load balancing (L4 vs L7, algorithms, health checks, circuit breakers)
+  - Database scaling (read replicas, sharding, connection pooling)
+  - Performance optimization (async processing, denormalization)
+
 #### Practical Guides (ecommerce-microservices/docs/)
 **Total:** ~50 KB across multiple guides
 
@@ -92,6 +104,9 @@ User: "How do I implement event sourcing?"
 
 User: "What's the Saga pattern?"
 → Read docs/phase2-architecture-patterns/event-driven-architecture.md (section 4)
+
+User: "How do I implement caching?"
+→ Read docs/phase3-scalability-performance/scalability-performance.md (section 1)
 ```
 
 **❌ BAD - Don't read automatically:**
@@ -106,7 +121,7 @@ User: "List all the files"
 → Don't include docs in file listing, they're reference materials
 ```
 
-**Why?** These files are very large (240 KB total) and contain educational content. They should only be loaded when genuinely needed for the current task to conserve tokens and improve response time.
+**Why?** These files are very large (290 KB total) and contain educational content. They should only be loaded when genuinely needed for the current task to conserve tokens and improve response time.
 
 ---
 
