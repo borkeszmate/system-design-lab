@@ -12,13 +12,19 @@ This repository documents a comprehensive learning path from monolithic applicat
 
 ## 📚 Learning Materials (Important for Agents!)
 
-**Location:** `ecommerce-microservices/docs/`
+This project contains **extensive educational reference documents** in multiple locations. These files are **comprehensive learning materials** (240 KB total) that should **NOT be read automatically** to conserve tokens.
 
-This project contains educational reference documents in the `docs/` folder. These files are **comprehensive learning materials** that should **NOT be read automatically** to conserve tokens.
+### Documentation Locations:
+
+1. **`docs/fundamentals/`** - Phase 1 foundations (119 KB, 4 hours reading)
+2. **`docs/phase2-architecture-patterns/`** - Phase 2 patterns (121 KB, 4.5 hours reading)
+3. **`ecommerce-microservices/docs/`** - Practical implementation guides
 
 ### Instructions for Claude Agents:
 
 **DO NOT:**
+- Automatically scan or read files in `docs/fundamentals/`
+- Automatically scan or read files in `docs/phase2-architecture-patterns/`
 - Automatically scan or read files in `ecommerce-microservices/docs/`
 - Load these files into context unless explicitly needed
 - Include them in exploratory file reads
@@ -27,14 +33,46 @@ This project contains educational reference documents in the `docs/` folder. The
 1. User explicitly asks about a topic covered in the docs
 2. User directly references a specific doc file
 3. The current task is directly related to the concepts explained
+4. User asks to explain a specific pattern or concept
 
 **How to decide if relevant:**
-1. First, check `ecommerce-microservices/docs/INDEX.md` to see available topics
+1. First, check the relevant INDEX file:
+   - `docs/fundamentals/INDEX.md` - For Phase 1 topics
+   - `docs/phase2-architecture-patterns/INDEX.md` - For Phase 2 topics
+   - `ecommerce-microservices/docs/INDEX.md` - For practical guides
 2. Read the brief description in the INDEX
 3. Only open the full document if it directly answers the user's question
+4. Read only the specific section needed, not the entire document
 
-### Available Topics (as of 2025-12-22):
-See `ecommerce-microservices/docs/INDEX.md` for the complete list. Topics covered include:
+### Available Topics:
+
+#### Phase 1: Fundamentals (docs/fundamentals/)
+**Total:** 119 KB across 3 documents + INDEX
+
+- **Monolith Limitations** (~26 KB)
+  - Scalability bottlenecks, deployment risks, technology lock-in, team coordination
+
+- **Distributed Systems Fundamentals** (~50 KB)
+  - CAP Theorem, ACID vs BASE, Network Fallacies, Consistency Models
+
+- **System Design Principles** (~43 KB)
+  - Separation of Concerns, Single Responsibility, Loose Coupling/High Cohesion, Design for Failure
+
+#### Phase 2: Architecture Patterns (docs/phase2-architecture-patterns/)
+**Total:** 121 KB across 3 documents + INDEX
+
+- **Microservices Architecture** (~40 KB)
+  - Service boundaries, communication patterns, service mesh, API Gateway
+
+- **Event-Driven Architecture** (~43 KB)
+  - Event sourcing, CQRS, event streaming vs messaging, Saga pattern
+
+- **Architectural Patterns** (~38 KB)
+  - Layered, Hexagonal, Clean Architecture, Strangler Fig pattern
+
+#### Practical Guides (ecommerce-microservices/docs/)
+**Total:** ~50 KB across multiple guides
+
 - Docker volumes and data persistence
 - Daemons vs processes
 - Microservices communication patterns
@@ -42,7 +80,33 @@ See `ecommerce-microservices/docs/INDEX.md` for the complete list. Topics covere
 - Queue system comparisons (RabbitMQ vs Celery vs Solace)
 - Payment gateway integration patterns
 
-**Why?** These files are large (5-26KB each) and should only be loaded when genuinely needed for the current task.
+### Examples of Good vs Bad Usage:
+
+**✅ GOOD - Read when needed:**
+```
+User: "Explain the CAP theorem"
+→ Read docs/fundamentals/distributed-systems-fundamentals.md (section 1 only)
+
+User: "How do I implement event sourcing?"
+→ Read docs/phase2-architecture-patterns/event-driven-architecture.md (section 1)
+
+User: "What's the Saga pattern?"
+→ Read docs/phase2-architecture-patterns/event-driven-architecture.md (section 4)
+```
+
+**❌ BAD - Don't read automatically:**
+```
+User: "How do I run the tests?"
+→ Don't read any docs, this is a practical question
+
+User: "Debug this error in the code"
+→ Don't read theory docs, focus on debugging
+
+User: "List all the files"
+→ Don't include docs in file listing, they're reference materials
+```
+
+**Why?** These files are very large (240 KB total) and contain educational content. They should only be loaded when genuinely needed for the current task to conserve tokens and improve response time.
 
 ---
 
