@@ -238,6 +238,26 @@ Techniques for building systems that scale and perform:
 
 **Features:** Complete code examples, real-world patterns, trade-off analysis, hands-on exercises
 
+#### Phase 4: Data Management (~2 hours, 40 KB)
+**Location:** `/docs/phase4-data-management/`
+
+Master data storage and consistency in distributed systems:
+
+- **[Data Management](docs/phase4-data-management/data-management.md)** (~40 KB, 75-90 min)
+  - **Database Types & Use Cases:** Polyglot persistence strategy
+    - Relational (PostgreSQL, MySQL): ACID, transactions, referential integrity
+    - Document (MongoDB): Flexible schema, nested data
+    - Key-Value (Redis): Extreme speed, caching, sessions
+    - Column-Family (Cassandra): Massive scale, time-series
+    - Graph (Neo4j): Relationships, traversals
+    - Time-Series (InfluxDB, Prometheus): Metrics, monitoring
+  - **Data Consistency Patterns:** Two-Phase Commit (2PC), Saga pattern, Idempotency
+  - **Data Replication:** Master-slave, multi-master, quorum-based replication
+
+- **[Phase 4 Index](docs/phase4-data-management/INDEX.md)** - Database selection criteria, consistency patterns, replication guide
+
+**Features:** Database comparison matrices, complete implementation examples, conflict resolution strategies, hands-on exercises
+
 ### Architecture Deep Dives
 - [Microservices Architecture](ecommerce-microservices/ARCHITECTURE.md) - Design decisions
 - [Service Communication](ecommerce-microservices/docs/SERVICE_COMMUNICATION.md) - Sync vs async

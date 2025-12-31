@@ -12,14 +12,15 @@ This repository documents a comprehensive learning path from monolithic applicat
 
 ## 📚 Learning Materials (Important for Agents!)
 
-This project contains **extensive educational reference documents** in multiple locations. These files are **comprehensive learning materials** (290 KB total) that should **NOT be read automatically** to conserve tokens.
+This project contains **extensive educational reference documents** in multiple locations. These files are **comprehensive learning materials** (330 KB total) that should **NOT be read automatically** to conserve tokens.
 
 ### Documentation Locations:
 
 1. **`docs/fundamentals/`** - Phase 1 foundations (119 KB, 4 hours reading)
 2. **`docs/phase2-architecture-patterns/`** - Phase 2 patterns (121 KB, 4.5 hours reading)
 3. **`docs/phase3-scalability-performance/`** - Phase 3 scalability (50 KB, 2 hours reading)
-4. **`ecommerce-microservices/docs/`** - Practical implementation guides
+4. **`docs/phase4-data-management/`** - Phase 4 data management (40 KB, 2 hours reading)
+5. **`ecommerce-microservices/docs/`** - Practical implementation guides
 
 ### Instructions for Claude Agents:
 
@@ -27,6 +28,7 @@ This project contains **extensive educational reference documents** in multiple 
 - Automatically scan or read files in `docs/fundamentals/`
 - Automatically scan or read files in `docs/phase2-architecture-patterns/`
 - Automatically scan or read files in `docs/phase3-scalability-performance/`
+- Automatically scan or read files in `docs/phase4-data-management/`
 - Automatically scan or read files in `ecommerce-microservices/docs/`
 - Load these files into context unless explicitly needed
 - Include them in exploratory file reads
@@ -42,6 +44,7 @@ This project contains **extensive educational reference documents** in multiple 
    - `docs/fundamentals/INDEX.md` - For Phase 1 topics
    - `docs/phase2-architecture-patterns/INDEX.md` - For Phase 2 topics
    - `docs/phase3-scalability-performance/INDEX.md` - For Phase 3 topics
+   - `docs/phase4-data-management/INDEX.md` - For Phase 4 topics
    - `ecommerce-microservices/docs/INDEX.md` - For practical guides
 2. Read the brief description in the INDEX
 3. Only open the full document if it directly answers the user's question
@@ -82,6 +85,15 @@ This project contains **extensive educational reference documents** in multiple 
   - Database scaling (read replicas, sharding, connection pooling)
   - Performance optimization (async processing, denormalization)
 
+#### Phase 4: Data Management (docs/phase4-data-management/)
+**Total:** 40 KB (1 comprehensive document + INDEX)
+
+- **Data Management** (~40 KB)
+  - Database types (Relational, Document, Key-Value, Column-Family, Graph, Time-Series)
+  - Polyglot persistence strategy
+  - Data consistency patterns (Two-Phase Commit, Saga, Idempotency)
+  - Data replication (Master-slave, Multi-master, Quorum-based)
+
 #### Practical Guides (ecommerce-microservices/docs/)
 **Total:** ~50 KB across multiple guides
 
@@ -107,6 +119,12 @@ User: "What's the Saga pattern?"
 
 User: "How do I implement caching?"
 → Read docs/phase3-scalability-performance/scalability-performance.md (section 1)
+
+User: "When should I use MongoDB vs PostgreSQL?"
+→ Read docs/phase4-data-management/data-management.md (section 1)
+
+User: "Explain the Saga pattern for distributed transactions"
+→ Read docs/phase4-data-management/data-management.md (section 2)
 ```
 
 **❌ BAD - Don't read automatically:**
@@ -121,7 +139,7 @@ User: "List all the files"
 → Don't include docs in file listing, they're reference materials
 ```
 
-**Why?** These files are very large (290 KB total) and contain educational content. They should only be loaded when genuinely needed for the current task to conserve tokens and improve response time.
+**Why?** These files are very large (330 KB total) and contain educational content. They should only be loaded when genuinely needed for the current task to conserve tokens and improve response time.
 
 ---
 
