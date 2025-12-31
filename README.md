@@ -168,12 +168,67 @@ See [CLAUDE.md](CLAUDE.md) for the complete learning roadmap.
 - [Microservices Guide](ecommerce-microservices/README.md) - Setup and architecture
 - [Environment Setup](ecommerce-microservices/ENV_SETUP.md) - Configuration guide
 
+### 📖 Comprehensive Learning Path
+
+#### Phase 1: Fundamentals (~4 hours, 119 KB)
+**Location:** `/docs/fundamentals/`
+
+A complete foundation in distributed systems concepts:
+- **[Monolith Limitations](docs/fundamentals/monolith-limitations.md)** (~26 KB, 45-60 min)
+  - Scalability bottlenecks and cost implications
+  - Deployment risks with real incident case studies
+  - Technology lock-in and migration challenges
+  - Team coordination at scale (Brooks's Law)
+
+- **[Distributed Systems Fundamentals](docs/fundamentals/distributed-systems-fundamentals.md)** (~50 KB, 90-120 min)
+  - CAP Theorem: CP vs AP trade-offs with real examples
+  - ACID vs BASE: Different consistency philosophies
+  - Network Fallacies: 8 false assumptions about networks
+  - Consistency Models: From linearizable to eventual
+
+- **[System Design Principles](docs/fundamentals/system-design-principles.md)** (~43 KB, 75-90 min)
+  - Separation of Concerns: Horizontal, vertical, aspect
+  - Single Responsibility Principle at system level
+  - Loose Coupling, High Cohesion: Patterns and metrics
+  - Design for Failure: Circuit breakers, timeouts, bulkheads
+
+- **[Phase 1 Index](docs/fundamentals/INDEX.md)** - Navigation, progress tracking, and learning guide
+
+**Features:** 50+ real-world examples, 60+ diagrams, complete code samples, progress checklists
+
+#### Phase 2: Architecture Patterns (~4.5 hours, 121 KB)
+**Location:** `/docs/phase2-architecture-patterns/`
+
+Deep dive into specific architectural patterns for distributed systems:
+
+- **[Microservices Architecture](docs/phase2-architecture-patterns/microservices-architecture.md)** (~40 KB, 75-90 min)
+  - Service boundaries using Domain-Driven Design
+  - Communication patterns: Synchronous (REST/gRPC) vs Asynchronous (Queues/Streaming)
+  - Service Mesh concepts (Istio, Linkerd)
+  - API Gateway pattern and Backend for Frontend (BFF)
+
+- **[Event-Driven Architecture](docs/phase2-architecture-patterns/event-driven-architecture.md)** (~43 KB, 80-100 min)
+  - Event Sourcing: Complete implementation examples
+  - CQRS: Separate read and write models
+  - Event Streaming (Kafka) vs Messaging (RabbitMQ)
+  - Saga Pattern: Distributed transactions (Choreography vs Orchestration)
+
+- **[Architectural Patterns](docs/phase2-architecture-patterns/architectural-patterns.md)** (~38 KB, 70-85 min)
+  - Layered Architecture: Traditional 3-tier
+  - Hexagonal Architecture: Ports & Adapters
+  - Clean Architecture: Dependency rule and concentric circles
+  - Strangler Fig Pattern: Incremental legacy migration
+
+- **[Phase 2 Index](docs/phase2-architecture-patterns/INDEX.md)** - Pattern decision matrices, exercises, integration guide
+
+**Features:** 75+ code samples, pattern comparison tables, hands-on exercises, real-world case studies
+
 ### Architecture Deep Dives
 - [Microservices Architecture](ecommerce-microservices/ARCHITECTURE.md) - Design decisions
 - [Service Communication](ecommerce-microservices/docs/SERVICE_COMMUNICATION.md) - Sync vs async
 - [Message Broker Fundamentals](ecommerce-microservices/docs/MESSAGE_BROKER_FUNDAMENTALS.md) - RabbitMQ patterns
 
-### Learning Materials
+### Practical Guides
 - [Complete Documentation Index](ecommerce-microservices/docs/INDEX.md)
 - [Docker & Data Persistence](ecommerce-microservices/docs/DATA_PERSISTENCE_DEMO.md)
 - [Queue Systems Comparison](ecommerce-microservices/docs/QUEUE_SYSTEMS_COMPARISON.md)
