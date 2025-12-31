@@ -1,0 +1,275 @@
+version: '3.8'
+
+services:
+  # RabbitMQ Message Broker - The Heart of Microservices Communication
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: microservices-rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS}
+    ports:
+      - "${RABBITMQ_AMQP_PORT}:5672"   # AMQP protocol
+      - "${RABBITMQ_MANAGEMENT_PORT}:15672" # Management UI
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+
+  # PostgreSQL for Order Service
+  order-db:
+    image: postgres:15-alpine
+    container_name: microservices-order-db
+    environment:
+      POSTGRES_USER: ${ORDER_DB_USER}
+      POSTGRES_PASSWORD: ${ORDER_DB_PASSWORD}
+      POSTGRES_DB: ${ORDER_DB_NAME}
+    ports:
+      - "${ORDER_DB_PORT}:5432"  # Different port to avoid conflict with monolith
+    volumes:
+      - order_db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${ORDER_DB_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # PostgreSQL for Payment Service
+  payment-db:
+    image: postgres:15-alpine
+    container_name: microservices-payment-db
+    environment:
+      POSTGRES_USER: ${PAYMENT_DB_USER}
+      POSTGRES_PASSWORD: ${PAYMENT_DB_PASSWORD}
+      POSTGRES_DB: ${PAYMENT_DB_NAME}
+    ports:
+      - "${PAYMENT_DB_PORT}:5432"  # Different port
+    volumes:
+      - payment_db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${PAYMENT_DB_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # PostgreSQL for Product Service
+  product-db:
+    image: postgres:15-alpine
+    container_name: microservices-product-db
+    environment:
+      POSTGRES_USER: ${PRODUCT_DB_USER}
+      POSTGRES_PASSWORD: ${PRODUCT_DB_PASSWORD}
+      POSTGRES_DB: ${PRODUCT_DB_NAME}
+    ports:
+      - "${PRODUCT_DB_PORT}:5432"
+    volumes:
+      - product_db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${PRODUCT_DB_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # PostgreSQL for User Service
+  user-db:
+    image: postgres:15-alpine
+    container_name: microservices-user-db
+    environment:
+      POSTGRES_USER: ${USER_DB_USER}
+      POSTGRES_PASSWORD: ${USER_DB_PASSWORD}
+      POSTGRES_DB: ${USER_DB_NAME}
+    ports:
+      - "${USER_DB_PORT}:5432"
+    volumes:
+      - user_db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${USER_DB_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # PostgreSQL for Cart Service
+  cart-db:
+    image: postgres:15-alpine
+    container_name: microservices-cart-db
+    environment:
+      POSTGRES_USER: ${CART_DB_USER}
+      POSTGRES_PASSWORD: ${CART_DB_PASSWORD}
+      POSTGRES_DB: ${CART_DB_NAME}
+    ports:
+      - "${CART_DB_PORT}:5432"
+    volumes:
+      - cart_db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${CART_DB_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # MailHog for testing emails
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: microservices-mailhog
+    ports:
+      - "${MAILHOG_SMTP_PORT}:1025"  # SMTP server (different port)
+      - "${MAILHOG_WEB_PORT}:8025"  # Web UI (different port)
+    logging:
+      driver: none
+
+  # API Gateway - Entry point for all requests
+  api-gateway:
+    build:
+      context: ./api-gateway
+      dockerfile: Dockerfile
+    container_name: microservices-gateway
+    ports:
+      - "${API_GATEWAY_PORT}:9000"  # Different from monolith (8000)
+    environment:
+      - USER_SERVICE_URL=${USER_SERVICE_URL}
+      - PRODUCT_SERVICE_URL=${PRODUCT_SERVICE_URL}
+      - CART_SERVICE_URL=${CART_SERVICE_URL}
+      - ORDER_SERVICE_URL=${ORDER_SERVICE_URL}
+      - PAYMENT_SERVICE_URL=${PAYMENT_SERVICE_URL}
+      - EMAIL_SERVICE_URL=${EMAIL_SERVICE_URL}
+    depends_on:
+      - user-service
+      - product-service
+      - cart-service
+      - order-service
+    volumes:
+      - ./api-gateway:/app
+    command: uvicorn app.main:app --host 0.0.0.0 --port 9000 --reload
+
+  # Order Service - Handles order creation
+  order-service:
+    build:
+      context: ./services/order-service
+      dockerfile: Dockerfile
+    container_name: microservices-order
+    ports:
+      - "${ORDER_SERVICE_PORT}:8001"
+    environment:
+      - DATABASE_URL=postgresql://${ORDER_DB_USER}:${ORDER_DB_PASSWORD}@order-db:5432/${ORDER_DB_NAME}
+      - RABBITMQ_URL=amqp://${RABBITMQ_DEFAULT_USER}:${RABBITMQ_DEFAULT_PASS}@rabbitmq:5672/
+    depends_on:
+      - order-db
+      - rabbitmq
+    volumes:
+      - ./services/order-service:/app
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8001 --reload
+
+  # Payment Service - Processes payments asynchronously
+  payment-service:
+    build:
+      context: ./services/payment-service
+      dockerfile: Dockerfile
+    container_name: microservices-payment
+    ports:
+      - "${PAYMENT_SERVICE_PORT}:8002"
+    environment:
+      - DATABASE_URL=postgresql://${PAYMENT_DB_USER}:${PAYMENT_DB_PASSWORD}@payment-db:5432/${PAYMENT_DB_NAME}
+      - RABBITMQ_URL=amqp://${RABBITMQ_DEFAULT_USER}:${RABBITMQ_DEFAULT_PASS}@rabbitmq:5672/
+    depends_on:
+      - payment-db
+      - rabbitmq
+    volumes:
+      - ./services/payment-service:/app
+    command: python -m app.main
+
+  # Email Service - Sends emails asynchronously
+  email-service:
+    build:
+      context: ./services/email-service
+      dockerfile: Dockerfile
+    container_name: microservices-email
+    ports:
+      - "${EMAIL_SERVICE_PORT}:8003"
+    environment:
+      - RABBITMQ_URL=amqp://${RABBITMQ_DEFAULT_USER}:${RABBITMQ_DEFAULT_PASS}@rabbitmq:5672/
+      - SMTP_HOST=${SMTP_HOST}
+      - SMTP_PORT=${SMTP_PORT}
+    depends_on:
+      - rabbitmq
+      - mailhog
+    volumes:
+      - ./services/email-service:/app
+    command: python -m app.main
+
+  # Product Service - Manages product catalog
+  product-service:
+    build:
+      context: ./services/product-service
+      dockerfile: Dockerfile
+    container_name: microservices-product
+    ports:
+      - "${PRODUCT_SERVICE_PORT}:8004"
+    environment:
+      - DATABASE_URL=postgresql://${PRODUCT_DB_USER}:${PRODUCT_DB_PASSWORD}@product-db:5432/${PRODUCT_DB_NAME}
+    depends_on:
+      - product-db
+    volumes:
+      - ./services/product-service:/app
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8004 --reload
+
+  # User Service - Authentication and user management
+  user-service:
+    build:
+      context: ./services/user-service
+      dockerfile: Dockerfile
+    container_name: microservices-user
+    ports:
+      - "${USER_SERVICE_PORT}:8005"
+    environment:
+      - DATABASE_URL=postgresql://${USER_DB_USER}:${USER_DB_PASSWORD}@user-db:5432/${USER_DB_NAME}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+    depends_on:
+      - user-db
+    volumes:
+      - ./services/user-service:/app
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8005 --reload
+
+  # Cart Service - Shopping cart management
+  cart-service:
+    build:
+      context: ./services/cart-service
+      dockerfile: Dockerfile
+    container_name: microservices-cart
+    ports:
+      - "${CART_SERVICE_PORT}:8006"
+    environment:
+      - DATABASE_URL=postgresql://${CART_DB_USER}:${CART_DB_PASSWORD}@cart-db:5432/${CART_DB_NAME}
+      - PRODUCT_SERVICE_URL=${PRODUCT_SERVICE_URL}
+    depends_on:
+      - cart-db
+      - product-service
+    volumes:
+      - ./services/cart-service:/app
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8006 --reload
+
+  # Frontend - React application with Redux
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: microservices-frontend
+    ports:
+      - "${FRONTEND_PORT}:3000"
+    environment:
+      - VITE_API_URL=${VITE_API_URL}
+    depends_on:
+      - api-gateway
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    command: npm run dev
+
+volumes:
+  rabbitmq_data:
+  order_db_data:
+  payment_db_data:
+  product_db_data:
+  user_db_data:
+  cart_db_data:

@@ -1,0 +1,19 @@
+"""Database models for Product Service"""
+from sqlalchemy import Column, Integer, String, Numeric, DateTime, func
+from ..infrastructure.database import Base
+
+
+class Product(Base):
+    """Product model"""
+    __tablename__ = "products"
+
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String, nullable=False)
+    description = Column(String)
+    price = Column(Numeric(10, 2), nullable=False)
+    stock = Column(Integer, default=0)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+    updated_at = Column(DateTime(timezone=True), onupdate=func.now())
+
+    def __repr__(self):
+        return f"<Product(id={self.id}, name='{self.name}', price={self.price})>"

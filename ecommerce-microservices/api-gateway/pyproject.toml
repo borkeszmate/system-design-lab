@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "api-gateway"
+version = "0.1.0"
+description = "API Gateway - Microservices E-commerce"
+authors = ["System Design Learning"]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.104.1"
+uvicorn = {extras = ["standard"], version = "^0.24.0"}
+pydantic = {extras = ["email"], version = "^2.5.0"}
+pydantic-settings = "^2.1.0"
+httpx = "^0.25.0"  # HTTP client for making requests to services
+pyjwt = "^2.8.0"  # JWT token handling
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

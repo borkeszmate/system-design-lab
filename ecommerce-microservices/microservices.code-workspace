@@ -1,0 +1,116 @@
+{
+  "folders": [
+    {
+      "name": "🌐 Root",
+      "path": "."
+    },
+    {
+      "name": "🚪 API Gateway",
+      "path": "api-gateway",
+      "settings": {
+        "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python"
+      }
+    },
+    {
+      "name": "🛍️ Product Service",
+      "path": "services/product-service",
+      "settings": {
+        "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python"
+      }
+    },
+    {
+      "name": "👤 User Service",
+      "path": "services/user-service",
+      "settings": {
+        "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python"
+      }
+    },
+    {
+      "name": "🛒 Cart Service",
+      "path": "services/cart-service",
+      "settings": {
+        "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python"
+      }
+    },
+    {
+      "name": "📦 Order Service",
+      "path": "services/order-service",
+      "settings": {
+        "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python"
+      }
+    },
+    {
+      "name": "💳 Payment Service",
+      "path": "services/payment-service",
+      "settings": {
+        "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python"
+      }
+    },
+    {
+      "name": "📧 Email Service",
+      "path": "services/email-service",
+      "settings": {
+        "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python"
+      }
+    },
+    {
+      "name": "⚛️ Frontend",
+      "path": "frontend"
+    }
+  ],
+  "settings": {
+    // Python settings
+    "python.languageServer": "Pylance",
+    "python.terminal.activateEnvironment": true,
+
+    // Auto-detect virtual environments
+    "python.venvPath": "${workspaceFolder}",
+
+    // Formatting
+    "[python]": {
+      "editor.formatOnSave": false,
+      "editor.tabSize": 4,
+      "editor.insertSpaces": true
+    },
+
+    // JavaScript/TypeScript (Frontend)
+    "[javascript]": {
+      "editor.formatOnSave": true,
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[javascriptreact]": {
+      "editor.formatOnSave": true,
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+
+    // Files
+    "files.exclude": {
+      "**/__pycache__": true,
+      "**/*.pyc": true,
+      "**/.pytest_cache": true
+    },
+
+    "search.exclude": {
+      "**/.venv": true,
+      "**/node_modules": true,
+      "**/__pycache__": true,
+      "**/poetry.lock": true
+    },
+
+    // Terminal
+    "terminal.integrated.cwd": "${fileDirname}",
+
+    // Docker
+    "docker.languageserver.formatter.ignoreMultilineInstructions": true
+  },
+  "extensions": {
+    "recommendations": [
+      "ms-python.python",
+      "ms-python.venv-manager",
+      "ms-azuretools.vscode-docker",
+      "esbenp.prettier-vscode",
+      "dbaeumer.vscode-eslint",
+      "ms-vscode.makefile-tools"
+    ]
+  }
+}

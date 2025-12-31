@@ -1,0 +1,447 @@
+# System Design Learning Journey
+
+## Overview
+This repository documents a comprehensive learning path from monolithic applications to distributed system design. The goal is to understand the principles, patterns, and trade-offs involved in building scalable, resilient systems.
+
+## Current State
+**Background:** Experienced with complex monolithic applications
+**Goal:** Master distributed system design and modern architecture patterns
+**Approach:** Theory + Practice with hands-on implementations
+
+---
+
+## 📚 Learning Materials (Important for Agents!)
+
+**Location:** `ecommerce-microservices/docs/`
+
+This project contains educational reference documents in the `docs/` folder. These files are **comprehensive learning materials** that should **NOT be read automatically** to conserve tokens.
+
+### Instructions for Claude Agents:
+
+**DO NOT:**
+- Automatically scan or read files in `ecommerce-microservices/docs/`
+- Load these files into context unless explicitly needed
+- Include them in exploratory file reads
+
+**ONLY read these files when:**
+1. User explicitly asks about a topic covered in the docs
+2. User directly references a specific doc file
+3. The current task is directly related to the concepts explained
+
+**How to decide if relevant:**
+1. First, check `ecommerce-microservices/docs/INDEX.md` to see available topics
+2. Read the brief description in the INDEX
+3. Only open the full document if it directly answers the user's question
+
+### Available Topics (as of 2025-12-22):
+See `ecommerce-microservices/docs/INDEX.md` for the complete list. Topics covered include:
+- Docker volumes and data persistence
+- Daemons vs processes
+- Microservices communication patterns
+- Message broker fundamentals (RabbitMQ)
+- Queue system comparisons (RabbitMQ vs Celery vs Solace)
+- Payment gateway integration patterns
+
+**Why?** These files are large (5-26KB each) and should only be loaded when genuinely needed for the current task.
+
+---
+
+## Learning Curve
+
+### Phase 1: Foundation (Weeks 1-2)
+**Goal:** Understand why we move beyond monoliths and core distributed system concepts
+
+#### Topics to Cover:
+- **Monolith Limitations**
+  - Scalability bottlenecks
+  - Deployment risks
+  - Technology lock-in
+  - Team coordination challenges
+
+- **Distributed Systems Fundamentals**
+  - CAP Theorem (Consistency, Availability, Partition Tolerance)
+  - ACID vs BASE
+  - Network fallacies
+  - Consistency models (eventual, strong, causal)
+
+- **System Design Principles**
+  - Separation of concerns
+  - Single Responsibility Principle at system level
+  - Loose coupling, high cohesion
+  - Design for failure
+
+#### Practical Exercise:
+- Document your current monolith's pain points
+- Identify bounded contexts using Domain-Driven Design
+- Create a service decomposition proposal
+
+---
+
+### Phase 2: Architecture Patterns (Weeks 3-4)
+**Goal:** Learn common architectural patterns and when to use them
+
+#### Topics to Cover:
+- **Microservices Architecture**
+  - Service boundaries and sizing
+  - Communication patterns (sync vs async)
+  - Service mesh concepts
+  - API Gateway pattern
+
+- **Event-Driven Architecture**
+  - Event sourcing
+  - CQRS (Command Query Responsibility Segregation)
+  - Event streaming vs messaging
+  - Saga pattern for distributed transactions
+
+- **Other Patterns**
+  - Layered architecture
+  - Hexagonal architecture (Ports & Adapters)
+  - Clean architecture
+  - Strangler Fig pattern (for migration)
+
+#### Practical Exercise:
+- Design a microservices architecture for your monolith
+- Implement a simple event-driven system (2-3 services)
+- Build an API Gateway proof-of-concept
+
+---
+
+### Phase 3: Scalability & Performance (Weeks 5-6)
+**Goal:** Learn how to scale systems horizontally and vertically
+
+#### Topics to Cover:
+- **Caching Strategies**
+  - Cache-aside, write-through, write-behind
+  - CDN (Content Delivery Networks)
+  - Redis, Memcached patterns
+  - Cache invalidation strategies
+
+- **Load Balancing**
+  - Layer 4 vs Layer 7 load balancing
+  - Round-robin, least connections, consistent hashing
+  - Health checks and circuit breakers
+  - Global and regional load balancing
+
+- **Database Scaling**
+  - Read replicas
+  - Sharding strategies (horizontal partitioning)
+  - Database per service pattern
+  - Denormalization for read performance
+  - Connection pooling
+
+- **Asynchronous Processing**
+  - Message queues (RabbitMQ, Kafka, SQS)
+  - Job queues and workers
+  - Backpressure handling
+  - Dead letter queues
+
+#### Practical Exercise:
+- Implement caching layer (Redis) for high-traffic endpoints
+- Set up load balancer with multiple instances
+- Create a job queue system with workers
+
+---
+
+### Phase 4: Data Management (Weeks 7-8)
+**Goal:** Master data storage, consistency, and replication in distributed systems
+
+#### Topics to Cover:
+- **Database Types & Use Cases**
+  - Relational (PostgreSQL, MySQL)
+  - Document stores (MongoDB, CouchDB)
+  - Key-value stores (Redis, DynamoDB)
+  - Column-family (Cassandra, HBase)
+  - Graph databases (Neo4j)
+  - Time-series databases (InfluxDB, TimescaleDB)
+
+- **Data Consistency Patterns**
+  - Two-phase commit (2PC)
+  - Three-phase commit
+  - Saga pattern
+  - Compensating transactions
+  - Idempotency
+
+- **Data Replication**
+  - Master-slave replication
+  - Multi-master replication
+  - Quorum-based replication
+  - Conflict resolution
+
+#### Practical Exercise:
+- Design a polyglot persistence solution
+- Implement a distributed transaction with Saga pattern
+- Set up database replication (master-slave)
+
+---
+
+### Phase 5: Reliability & Resilience (Weeks 9-10)
+**Goal:** Build systems that gracefully handle failures
+
+#### Topics to Cover:
+- **Fault Tolerance Patterns**
+  - Circuit breaker (Hystrix, Resilience4j)
+  - Bulkhead pattern
+  - Retry with exponential backoff
+  - Timeout management
+  - Fallback strategies
+
+- **High Availability**
+  - Redundancy and failover
+  - Active-active vs active-passive
+  - Health checks and monitoring
+  - Disaster recovery planning
+  - SLAs, SLOs, SLIs
+
+- **Chaos Engineering**
+  - Failure injection
+  - Chaos Monkey concepts
+  - Testing resilience
+
+#### Practical Exercise:
+- Implement circuit breaker pattern
+- Set up health checks and auto-recovery
+- Conduct a chaos engineering experiment
+
+---
+
+### Phase 6: Observability & Monitoring (Weeks 11-12)
+**Goal:** Learn to understand and debug distributed systems in production
+
+#### Topics to Cover:
+- **The Three Pillars**
+  - Logging (structured logging, log aggregation)
+  - Metrics (RED/USE methods, golden signals)
+  - Tracing (distributed tracing, OpenTelemetry)
+
+- **Tools & Platforms**
+  - ELK Stack (Elasticsearch, Logstash, Kibana)
+  - Prometheus + Grafana
+  - Jaeger, Zipkin for tracing
+  - DataDog, New Relic (commercial options)
+
+- **Alerting & On-Call**
+  - Alert design (actionable, not noisy)
+  - On-call best practices
+  - Incident response
+
+#### Practical Exercise:
+- Set up complete observability stack
+- Implement distributed tracing across services
+- Create meaningful dashboards and alerts
+
+---
+
+### Phase 7: Security & Identity (Weeks 13-14)
+**Goal:** Secure distributed systems and manage authentication/authorization
+
+#### Topics to Cover:
+- **Authentication & Authorization**
+  - OAuth 2.0 / OpenID Connect
+  - JWT tokens
+  - API keys and secrets management
+  - Service-to-service authentication (mTLS)
+
+- **Security Patterns**
+  - Zero trust architecture
+  - Defense in depth
+  - Rate limiting and throttling
+  - DDoS protection
+  - API security best practices
+
+- **Secrets Management**
+  - Vault, AWS Secrets Manager
+  - Key rotation
+  - Encryption at rest and in transit
+
+#### Practical Exercise:
+- Implement OAuth 2.0 authentication
+- Set up secrets management solution
+- Add rate limiting to API gateway
+
+---
+
+### Phase 8: Deployment & DevOps (Weeks 15-16)
+**Goal:** Master deployment strategies and infrastructure as code
+
+#### Topics to Cover:
+- **Containerization & Orchestration**
+  - Docker deep dive
+  - Kubernetes fundamentals
+  - Service discovery
+  - Container networking
+
+- **CI/CD Pipelines**
+  - Automated testing strategies
+  - Blue-green deployments
+  - Canary releases
+  - Rolling deployments
+  - Feature flags
+
+- **Infrastructure as Code**
+  - Terraform
+  - CloudFormation
+  - Pulumi
+  - GitOps principles
+
+#### Practical Exercise:
+- Containerize your services
+- Deploy to Kubernetes cluster
+- Build complete CI/CD pipeline
+
+---
+
+### Phase 9: Real-World Systems (Weeks 17-18)
+**Goal:** Study and understand large-scale production systems
+
+#### Systems to Analyze:
+- **URL Shortener** (like bit.ly)
+  - Requirements: low latency, high availability
+  - Key concepts: hashing, base62 encoding, caching
+
+- **Social Media Feed** (like Twitter)
+  - Requirements: real-time updates, high read/write ratio
+  - Key concepts: fan-out on write vs read, timelines
+
+- **Video Streaming** (like YouTube)
+  - Requirements: bandwidth optimization, global distribution
+  - Key concepts: CDN, adaptive bitrate, chunking
+
+- **E-commerce Platform** (like Amazon)
+  - Requirements: transactions, inventory, search
+  - Key concepts: eventual consistency, order processing
+
+- **Messaging System** (like WhatsApp)
+  - Requirements: real-time, delivery guarantees
+  - Key concepts: WebSockets, message queues, presence
+
+- **Ride-Sharing** (like Uber)
+  - Requirements: geolocation, matching, real-time tracking
+  - Key concepts: geohashing, websockets, event streaming
+
+#### Practical Exercise:
+- Design 2-3 of these systems in detail
+- Implement a simplified version of one system
+
+---
+
+### Phase 10: Advanced Topics (Weeks 19-20)
+**Goal:** Explore cutting-edge concepts and optimization techniques
+
+#### Topics to Cover:
+- **Advanced Patterns**
+  - Serverless architecture (Lambda, Cloud Functions)
+  - Edge computing
+  - GraphQL federation
+  - gRPC and protocol buffers
+  - Service mesh (Istio, Linkerd)
+
+- **Performance Optimization**
+  - Database query optimization
+  - N+1 query problem solutions
+  - Connection pooling strategies
+  - Batch processing optimization
+  - Memory and CPU profiling
+
+- **Global Distribution**
+  - Multi-region deployments
+  - Data locality and GDPR compliance
+  - Global load balancing
+  - Conflict-free replicated data types (CRDTs)
+
+#### Practical Exercise:
+- Implement serverless functions
+- Set up multi-region deployment
+- Optimize a bottleneck in your system
+
+---
+
+## Projects Roadmap
+
+### Mini Projects (Throughout)
+1. **URL Shortener** - Week 3-4
+2. **Task Queue System** - Week 5-6
+3. **Chat Application** - Week 7-8
+4. **Rate Limiter** - Week 9-10
+5. **Notification Service** - Week 11-12
+
+### Capstone Project (Weeks 17-20)
+Design and implement a complete distributed system of your choice:
+- **Option A:** E-commerce platform with microservices
+- **Option B:** Real-time analytics dashboard
+- **Option C:** Content delivery and streaming service
+- **Option D:** Distributed task scheduler
+
+Requirements:
+- 5+ microservices
+- Multiple databases (polyglot persistence)
+- Message queue integration
+- Complete observability
+- CI/CD pipeline
+- Load testing and optimization
+- Documentation and diagrams
+
+---
+
+## Resources
+
+### Books
+- "Designing Data-Intensive Applications" by Martin Kleppmann
+- "System Design Interview" by Alex Xu (Vol 1 & 2)
+- "Building Microservices" by Sam Newman
+- "Release It!" by Michael Nygard
+- "Database Internals" by Alex Petrov
+
+### Online Resources
+- System Design Primer (GitHub)
+- High Scalability blog
+- AWS Architecture Center
+- Google Cloud Architecture Framework
+- Microsoft Azure Architecture Center
+
+### Practice Platforms
+- LeetCode System Design
+- System Design Interview prep sites
+- AWS Free Tier for hands-on practice
+
+---
+
+## Progress Tracking
+
+### Completed
+- [ ] Phase 1: Foundation
+- [ ] Phase 2: Architecture Patterns
+- [ ] Phase 3: Scalability & Performance
+- [ ] Phase 4: Data Management
+- [ ] Phase 5: Reliability & Resilience
+- [ ] Phase 6: Observability & Monitoring
+- [ ] Phase 7: Security & Identity
+- [ ] Phase 8: Deployment & DevOps
+- [ ] Phase 9: Real-World Systems
+- [ ] Phase 10: Advanced Topics
+
+### Mini Projects
+- [ ] URL Shortener
+- [ ] Task Queue System
+- [ ] Chat Application
+- [ ] Rate Limiter
+- [ ] Notification Service
+
+### Capstone Project
+- [ ] Design document
+- [ ] Implementation
+- [ ] Testing & optimization
+- [ ] Documentation
+
+---
+
+## Notes & Learnings
+(Document key insights, challenges, and solutions as you progress)
+
+---
+
+## Next Steps
+1. Start with Phase 1: Review monolith limitations and identify decomposition boundaries
+2. Set up your learning environment (Docker, local Kubernetes, cloud account)
+3. Begin documenting your current system's architecture
+
+**Remember:** System design is about trade-offs. There's no perfect solution, only solutions that fit specific requirements and constraints. Focus on understanding the "why" behind each pattern and practice making reasoned decisions.
