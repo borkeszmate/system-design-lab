@@ -12,7 +12,7 @@ This repository documents a comprehensive learning path from monolithic applicat
 
 ## 📚 Learning Materials (Important for Agents!)
 
-This project contains **extensive educational reference documents** in multiple locations. These files are **comprehensive learning materials** (330 KB total) that should **NOT be read automatically** to conserve tokens.
+This project contains **extensive educational reference documents** in multiple locations. These files are **comprehensive learning materials** (~625 KB total) that should **NOT be read automatically** to conserve tokens.
 
 ### Documentation Locations:
 
@@ -20,7 +20,13 @@ This project contains **extensive educational reference documents** in multiple 
 2. **`docs/phase2-architecture-patterns/`** - Phase 2 patterns (121 KB, 4.5 hours reading)
 3. **`docs/phase3-scalability-performance/`** - Phase 3 scalability (50 KB, 2 hours reading)
 4. **`docs/phase4-data-management/`** - Phase 4 data management (40 KB, 2 hours reading)
-5. **`ecommerce-microservices/docs/`** - Practical implementation guides
+5. **`docs/phase5-reliability-resilience/`** - Phase 5 reliability (50 KB, 2 hours reading)
+6. **`docs/phase6-observability-monitoring/`** - Phase 6 observability (50 KB, 2 hours reading)
+7. **`docs/phase7-security-identity/`** - Phase 7 security (45 KB, 2 hours reading)
+8. **`docs/phase8-deployment-devops/`** - Phase 8 deployment (40 KB, 1.5 hours reading)
+9. **`docs/phase9-real-world-systems/`** - Phase 9 case studies (50 KB, 2 hours reading)
+10. **`docs/phase10-advanced-topics/`** - Phase 10 advanced (40 KB, 1.5 hours reading)
+11. **`ecommerce-microservices/docs/`** - Practical implementation guides
 
 ### Instructions for Claude Agents:
 
@@ -29,6 +35,12 @@ This project contains **extensive educational reference documents** in multiple 
 - Automatically scan or read files in `docs/phase2-architecture-patterns/`
 - Automatically scan or read files in `docs/phase3-scalability-performance/`
 - Automatically scan or read files in `docs/phase4-data-management/`
+- Automatically scan or read files in `docs/phase5-reliability-resilience/`
+- Automatically scan or read files in `docs/phase6-observability-monitoring/`
+- Automatically scan or read files in `docs/phase7-security-identity/`
+- Automatically scan or read files in `docs/phase8-deployment-devops/`
+- Automatically scan or read files in `docs/phase9-real-world-systems/`
+- Automatically scan or read files in `docs/phase10-advanced-topics/`
 - Automatically scan or read files in `ecommerce-microservices/docs/`
 - Load these files into context unless explicitly needed
 - Include them in exploratory file reads
@@ -45,6 +57,12 @@ This project contains **extensive educational reference documents** in multiple 
    - `docs/phase2-architecture-patterns/INDEX.md` - For Phase 2 topics
    - `docs/phase3-scalability-performance/INDEX.md` - For Phase 3 topics
    - `docs/phase4-data-management/INDEX.md` - For Phase 4 topics
+   - `docs/phase5-reliability-resilience/INDEX.md` - For Phase 5 topics
+   - `docs/phase6-observability-monitoring/INDEX.md` - For Phase 6 topics
+   - `docs/phase7-security-identity/INDEX.md` - For Phase 7 topics
+   - `docs/phase8-deployment-devops/INDEX.md` - For Phase 8 topics
+   - `docs/phase9-real-world-systems/INDEX.md` - For Phase 9 topics
+   - `docs/phase10-advanced-topics/INDEX.md` - For Phase 10 topics
    - `ecommerce-microservices/docs/INDEX.md` - For practical guides
 2. Read the brief description in the INDEX
 3. Only open the full document if it directly answers the user's question
@@ -94,6 +112,65 @@ This project contains **extensive educational reference documents** in multiple 
   - Data consistency patterns (Two-Phase Commit, Saga, Idempotency)
   - Data replication (Master-slave, Multi-master, Quorum-based)
 
+#### Phase 5: Reliability & Resilience (docs/phase5-reliability-resilience/)
+**Total:** 50 KB (1 comprehensive document + INDEX)
+
+- **Reliability & Resilience** (~50 KB)
+  - Fault tolerance patterns (Circuit breaker, Bulkhead, Retry, Timeout, Fallback)
+  - High availability (Redundancy, health checks, SLAs/SLOs/SLIs, error budgets)
+  - Chaos engineering (Principles, experiments, Chaos Monkey, Gremlin, Chaos Mesh)
+
+#### Phase 6: Observability & Monitoring (docs/phase6-observability-monitoring/)
+**Total:** 50 KB (1 comprehensive document + INDEX)
+
+- **Observability & Monitoring** (~50 KB)
+  - Three pillars (Metrics, Logs, Traces)
+  - Monitoring methods (RED, USE, Golden Signals)
+  - Tools (Prometheus, Grafana, ELK, OpenTelemetry, Jaeger)
+  - Alerting (Design principles, on-call practices, runbooks)
+
+#### Phase 7: Security & Identity (docs/phase7-security-identity/)
+**Total:** 45 KB (1 comprehensive document + INDEX)
+
+- **Security & Identity** (~45 KB)
+  - Authentication (JWT, sessions, OAuth 2.0, mTLS)
+  - Authorization (RBAC)
+  - Secrets management (HashiCorp Vault, key rotation)
+  - API security (Rate limiting, input validation, CORS, SQL injection prevention)
+  - Zero Trust Architecture
+
+#### Phase 8: Deployment & DevOps (docs/phase8-deployment-devops/)
+**Total:** 40 KB (1 comprehensive document + INDEX)
+
+- **Deployment & DevOps** (~40 KB)
+  - Containerization (Docker, multi-stage builds, Docker Compose)
+  - Kubernetes (Deployments, Services, Ingress, HPA, ConfigMaps, Secrets)
+  - CI/CD (GitHub Actions, GitLab CI)
+  - Deployment strategies (Rolling update, blue-green, canary)
+  - Infrastructure as Code (Terraform, Helm)
+
+#### Phase 9: Real-World Systems (docs/phase9-real-world-systems/)
+**Total:** 50 KB (1 comprehensive document + INDEX)
+
+- **Real-World Systems** (~50 KB)
+  - URL Shortener (Base62 encoding, caching, analytics)
+  - Social Media Feed (Hybrid fan-out strategy)
+  - Video Streaming (Adaptive bitrate, CDN)
+  - E-commerce (Inventory management, Saga, Elasticsearch)
+  - Ride-Sharing (Geospatial indexing, matching)
+  - Messaging (Delivery guarantees, Cassandra, presence)
+
+#### Phase 10: Advanced Topics (docs/phase10-advanced-topics/)
+**Total:** 40 KB (1 comprehensive document + INDEX)
+
+- **Advanced Topics** (~40 KB)
+  - Serverless (AWS Lambda, cold start mitigation)
+  - Edge Computing (Cloudflare Workers, Lambda@Edge)
+  - Modern APIs (GraphQL DataLoader, gRPC streaming)
+  - Service Mesh (Istio traffic management, mTLS)
+  - Performance (Query optimization, connection pooling, caching)
+  - Emerging (WebAssembly, CRDTs, Event Sourcing)
+
 #### Practical Guides (ecommerce-microservices/docs/)
 **Total:** ~50 KB across multiple guides
 
@@ -139,7 +216,7 @@ User: "List all the files"
 → Don't include docs in file listing, they're reference materials
 ```
 
-**Why?** These files are very large (330 KB total) and contain educational content. They should only be loaded when genuinely needed for the current task to conserve tokens and improve response time.
+**Why?** These files are very large (~625 KB total) and contain educational content. They should only be loaded when genuinely needed for the current task to conserve tokens and improve response time.
 
 ---
 
